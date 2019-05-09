@@ -1,0 +1,151 @@
+@media (min-width: 768px) {
+  .channel-list {
+    .btn-pay,
+    .btn-view-detail {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    padding-top: 66px;
+    padding-left: 140px;
+  }
+
+  aside {
+    width: 140px;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    padding-top: 66px;
+
+    .navbar {
+      .nav-link {
+        &.active {
+          &:after {
+            width: calc(100% + 10px);
+            border-radius: 0 3px 3px 0;
+          }
+
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  header .react-autosuggest__container {
+    .react-autosuggest__input {
+      min-width: 280px;
+    }
+  }
+
+  .channel-line {
+    width: 64%;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+@media (min-width: 1200px) {
+  header .react-autosuggest__container {
+    .react-autosuggest__input {
+      min-width: 500px;
+    }
+  }
+
+  .token-info {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -50px;
+  }
+
+  .channel-line {
+    width: 75%;
+  }
+}
+
+@media (max-width: 1199px) {
+  .token-info {
+    width: 100%;
+  }
+
+  .channel-line {
+    width: 1px;
+    height: 75%;
+    top: 48%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-left: 2px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+  }
+}
+
+
+@media (max-width: 991px) {
+  main {
+    padding-top: 160px;
+  }
+
+  .nav-address-container {
+    width: 100%;
+    border-left: none !important;
+
+    .address-header {
+      text-align: center;
+    }
+  }
+
+  aside {
+    width: 100%;
+    position: fixed;
+    top: 130px;
+
+    .nav-item {
+      text-align: center;
+    }
+
+    .lumino-version {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-join-network {
+    border-radius: 0.25rem !important;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+
+
+@media (max-width: 575px) {
+  .overflow-mobile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 99%;
+  }
+  .last-movements {
+    li {
+      border-bottom: 0 !important;
+    }
+  }
+
+  main {
+    padding-top: 179px;
+  }
+}
+
+@media (max-width: 400px) {
+  .Toastify__toast-container.Toastify__toast-container--top-right {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,26 @@
+.table {
+  thead {
+    th {
+      @include font-size(14);
+      color: $blue;
+    }
+  }
+}
+
+.rt-th {
+  @include font-size(14);
+  color: $blue;
+  font-weight: 700;
+}
+
+.rt-tr {
+  background: #EBECF0;
+
+  &.-odd {
+    background: #fff;
+  }
+
+  &.-even {
+
+  }
+}

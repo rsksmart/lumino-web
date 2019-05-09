@@ -1,0 +1,40 @@
+.filters-bar {
+  .form-control {
+    border-width: 0 0 1px 0;
+    border-bottom-style: dashed;
+    border-bottom-color: rgba(255,255,255,.5);
+    @include font-size(14);
+    @include placeholder($white)
+  }
+
+  .custom-select {
+    border-color: rgba(255,255,255,.5);
+    @include font-size(14);
+    color: $white;
+    background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fal' data-icon='angle-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' class='svg-inline--fa fa-angle-down fa-w-8 fa-2x'%3E%3Cpath fill='%2353C676' d='M119.5 326.9L3.5 209.1c-4.7-4.7-4.7-12.3 0-17l7.1-7.1c4.7-4.7 12.3-4.7 17 0L128 287.3l100.4-102.2c4.7-4.7 12.3-4.7 17 0l7.1 7.1c4.7 4.7 4.7 12.3 0 17L136.5 327c-4.7 4.6-12.3 4.6-17-.1z' class=''%3E%3C/path%3E%3C/svg%3E");
+    background-size: 8px 20px;
+  }
+
+  .custom-control-label {
+    &::before {
+      box-shadow: none;
+      background-color: transparent;
+      border: 1px solid $emerald;
+    }
+  }
+
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: transparent;
+  }
+
+  .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: none;
+  }
+
+  .btn-filter-search {
+    border-width: 0 0 1px 1px;
+    border-left-style: dashed;
+    border-bottom-style: dashed;
+    border-color: rgba(255,255,255,.5);
+  }
+}

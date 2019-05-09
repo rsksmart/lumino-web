@@ -1,0 +1,70 @@
+.modal-content {
+  border: none;
+  border-top: 3px solid $blue;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+
+  .modal-header {
+    border: none;
+    color: $blue;
+    @include font-size(24);
+    font-weight: 400;
+    border-bottom: 1px dashed #CDCDCD;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .modal-body {
+    border: none;
+  }
+
+  .modal-footer {
+    border: none;
+    padding: 0;
+  }
+
+  .close {
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    background: $blue;
+    opacity: 1;
+    text-shadow: none;
+    color: $white;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: -35px;
+    right: -35px;
+
+    span {
+      display: none;
+    }
+
+    &:before {
+      font-family: 'Font Awesome 5 Pro';
+      font-weight: 300;
+      @include font-size(18);
+      content: "\f00d";
+      position: absolute;
+      width: 100%;
+      top: 10px;
+      left: 0;
+    }
+  }
+
+  .btn-pay {
+    @include font-size(20);
+    border-radius: 0 0 0.25rem 0.25rem;
+    &:hover {
+      background: darken($emerald, 5%);
+    }
+  }
+
+  .custom-select {
+    @include font-size(14);
+    background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fal' data-icon='angle-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' class='svg-inline--fa fa-angle-down fa-w-8 fa-2x'%3E%3Cpath fill='%2353C676' d='M119.5 326.9L3.5 209.1c-4.7-4.7-4.7-12.3 0-17l7.1-7.1c4.7-4.7 12.3-4.7 17 0L128 287.3l100.4-102.2c4.7-4.7 12.3-4.7 17 0l7.1 7.1c4.7 4.7 4.7 12.3 0 17L136.5 327c-4.7 4.6-12.3 4.6-17-.1z' class=''%3E%3C/path%3E%3C/svg%3E");
+    background-size: 8px 20px;
+  }
+}

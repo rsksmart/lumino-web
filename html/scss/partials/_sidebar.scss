@@ -1,0 +1,66 @@
+aside {
+  z-index: 20;
+
+  .navbar {
+    .navbar-nav .nav-link {
+      @include font-size(14);
+      color: $white;
+      font-weight: 400;
+
+      span,
+      img {
+        z-index: 1;
+        position: relative;
+      }
+
+      &:after {
+        width: 100%;
+        height: 100%;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        border-radius: 0;
+        transition: all .3s linear;
+      }
+
+      &:hover {
+        color: $emerald;
+      }
+
+    }
+    .active {
+      .nav-link {
+        &:after {
+          width: 100%;
+          background: $emerald;
+          @extend .shadow-sm;
+        }
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .user-info {
+    background: darken($gray-darken, 5%);
+
+    span {
+      display: block;
+
+      &.name {
+        color: $emerald;
+        @include font-size(16);
+        font-weight: 600;
+      }
+
+      &.address {
+        @include font-size(12);
+        font-weight: 400;
+      }
+    }
+  }
+}

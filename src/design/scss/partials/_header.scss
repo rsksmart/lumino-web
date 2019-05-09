@@ -1,0 +1,72 @@
+header {
+  z-index: 30;
+  position: relative;
+
+  .navbar-brand img {
+    width: 100px;
+  }
+
+  .navbar-toggler {
+    border: none !important;
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(83,198,118,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+
+  .navbar {
+    .navbar-nav {
+      .nav-link {
+        @include font-size(28);
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        &.dropdown-toggle {
+          color: $emerald;
+
+          &::after {
+            content: none;
+          }
+        }
+      }
+
+      .show > .nav-link,
+      .active > .nav-link,
+      .nav-link.show,
+      .nav-link.active {
+        background: $blue;
+        color: $white;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: 0 0 3px 3px;
+    border: none;
+    border-top: 3px solid;
+    margin-top: 0;
+    border-color: $blue;
+  }
+
+  .btn-copy-address {
+    border: none;
+    padding: 0;
+    margin: 0 0 0 10px !important;
+    vertical-align: middle;
+    font-size: 18px;
+    color: $blue !important;
+    position: relative;
+    line-height: 1;
+    top: -2px;
+  }
+
+  .address-header {
+    small {
+      margin-top: -2px;
+    }
+  }
+}
+
+header .react-autosuggest__container {
+  position: relative;
+}

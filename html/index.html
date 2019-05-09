@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Styles CSS -->
+    <link rel="stylesheet" href="css/main.min.css">
+    <!-- Page Title -->
+    <title>Rif</title>
+  </head>
+  <body>
+    <header class="shadow-sm position-fixed w-100">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#side-bar" aria-controls="side-bar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand mx-auto ml-lg-3 mr-lg-0" href="index.html"><img src="images/logo-rif.svg" alt=""></a>
+
+        <ul class="navbar-nav ml-lg-auto flex-row">
+          <li class="nav-item">
+            <button type="button" name="button" class="nav-link btn-search px-3">
+              <img src="images/icon-search.svg" alt="">
+            </button>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="images/icon-bill.svg" alt="">
+            </a>
+            <div class="dropdown-menu  dropdown-menu-right shadow-sm" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <aside class="bg-dark shadow">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
+        <div class="collapse navbar-collapse" id="side-bar">
+          <ul class="navbar-nav flex-lg-column w-100">
+            <li class="user-info py-2 py-lg-5">
+              <span class="name">alice.rsk</span>
+              <span class="address text-white">(0x012345678900)</span>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link position-relative p-2 py-lg-4 px-lg-0" href="#">
+                <img src="images/icon-home.svg" alt="">
+                <span class="d-block position-relative">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative p-2 py-lg-4 px-lg-0" href="#">
+                <img src="images/tokens.svg" alt="">
+                <span class="d-block position-relative">Tokens</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative p-2 py-lg-4 px-lg-0" href="#">
+                <img src="images/chanels.svg" alt="">
+                <span class="d-block position-relative">Chanels</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    </aside>
+    <main>
+      <div class="top-bar text-center">
+        <ul class="text-center list-unstyled d-flex justify-content-center align-items-center h-100 text-white list-last-transaction">
+          <li class="mx-3"><img src="images/icon-left-arrow-big.svg" alt=""></li>
+          <li class="mx-3">12 T1</li>
+          <li class="mx-3">33 T2</li>
+          <li class="mx-3">44 T3</li>
+          <li class="mx-3">55 T5</li>
+          <li class="mx-3"><img src="images/icon-right-arrow-big.svg" alt=""></li>
+        </ul>
+      </div>
+      <div class="d-flex justify-content-center align-items-stretch graphics-container mx-auto my-5">
+        <div class="px-3 py-5 rounded-left bg-secondary d-flex align-items-center">
+          <ul class="text-center list-unstyled last-movements mb-0">
+            <li class="mb-2 last-movements__received">
+              <p class="mb-1 text-white">Payments <br> Received</p>
+              <span>200</span>
+            </li>
+            <li class="mb-2 last-movements__sent">
+              <p class="mb-1 text-white">Payments <br> Sent</p>
+              <span>100</span>
+            </li>
+            <li class="last-movements__pending">
+              <p class="mb-1 text-white">Payments <br> Pending</p>
+              <span>10</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white px-5">
+          <h1 class="display-1 text-center px-5 mt-5">Gráfica</h1>
+        </div>
+        <div class="rounded-right bg-white">
+          <ul class="text-center list-unstyled mb-0 d-flex flex-column align-items-stretch list-sort-graphic h-100">
+            <li class="h-100 d-flex align-items-center justify-content-center by-year">
+              Year
+            </li>
+            <li class="h-100 d-flex align-items-center justify-content-center by-month">
+              Month
+            </li>
+            <li class="h-100 d-flex align-items-center justify-content-center by-week">
+              Week
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white shadow-sm">
+        <div class="d-flex justify-content-center align-items-center py-2">
+          <h3 class="m-0 text-uppercase h4">Open Channels</h3>
+          <div class="custom-control custom-checkbox text-info mx-3">
+            <input type="checkbox" class="custom-control-input" id="justMine">
+            <label class="custom-control-label" for="justMine">Just mine</label>
+          </div>
+          <select class="custom-select w-auto shadow-none">
+            <option selected>Token</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">ORIGEN</th>
+              <th class="text-center" scope="col"></th>
+              <th class="text-center" scope="col">DESTINO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center align-middle">
+                0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+              <td class="text-center align-middle">
+                <p class="m-0">Token Name</p>
+                <img src="images/icon-duble-arrow.svg" alt="">
+              </td>
+              <td class="text-center align-middle">
+                @0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center align-middle">
+                0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+              <td class="text-center align-middle">
+                <p class="m-0">Token Name</p>
+                <img src="images/icon-duble-arrow.svg" alt="">
+              </td>
+              <td class="text-center align-middle">
+                @0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center align-middle">
+                0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+              <td class="text-center align-middle">
+                <p class="m-0">Token Name</p>
+                <img src="images/icon-duble-arrow.svg" alt="">
+              </td>
+              <td class="text-center align-middle">
+                @0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center align-middle">
+                0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+              <td class="text-center align-middle">
+                <p class="m-0">Token Name</p>
+                <img src="images/icon-duble-arrow.svg" alt="">
+              </td>
+              <td class="text-center align-middle">
+                @0x1408f54132e38545ca3256fecfc718ba6ca4b6f9
+                <p class="m-0 text-secondary">Balance</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="svg-overlay">
+      <filter id="blur">
+        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+      </filter>
+    </svg>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      $('.dropdown-toggle').on('click', function (e) {
+        e.preventDefault();
+        $('body').toggleClass('is-blurred');
+      });
+    </script>
+  </body>
+</html>

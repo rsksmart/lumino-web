@@ -1,0 +1,4 @@
+// FONT SIZER REM
+@mixin font-size($sizeValue) {
+  font-size: ($sizeValue * .0625) + rem;
+}

@@ -1,0 +1,29 @@
+@media (min-width: 992px) {
+  aside {
+    width: 140px;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    padding-top: 66px;
+
+    .navbar {
+      .active {
+        .nav-link {
+          &:after {
+            width: calc(100% + 10px);
+            border-radius: 0 3px 3px 0;
+          }
+
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 991px) {
+
+}

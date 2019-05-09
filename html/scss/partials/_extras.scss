@@ -1,0 +1,29 @@
+.overlay-blured {
+  width: 100%;
+  height: 100%;
+  background: transparentize($black, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+$svgBlur: url("#blur");
+
+.is-blurred {
+  overflow: hidden;
+
+  main {
+    filter: $svgBlur; /* SVG filters for browser support. */
+    filter: blur(5px); /* works in chrome */
+    -webkit-transition: -webkit-filter 100ms linear;
+    pointer-events: none;
+       user-select: none;
+    background: transparentize($black, .85);
+  }
+}

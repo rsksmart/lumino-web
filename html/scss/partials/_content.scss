@@ -1,0 +1,79 @@
+main {
+  // min-height: 100vh;
+  padding-top: 66px;
+  padding-left: 140px;
+}
+
+.top-bar {
+  height: 75px;
+  background: $blue-darken;
+}
+
+.graphics-container {
+  max-width: 1140px;
+}
+
+.last-movements {
+  p {
+    @include font-size(12);
+  }
+
+  span {
+    @include font-size(24);
+    font-weight: 700;
+  }
+
+  .last-movements__received {
+    span {
+      color: #14D944;
+    }
+  }
+
+  .last-movements__sent {
+    span {
+      color: #149DD9;
+    }
+  }
+
+  .last-movements__pending {
+    span {
+      color: #D9A114;
+    }
+  }
+}
+
+.list-sort-graphic {
+  width: 100px;
+
+  li {
+    border-left: 8px solid transparent;
+    @include font-size(12);
+    font-weight: 400;
+    text-align: center;
+
+    &.by-year {
+      border-color: $emerald;
+      color: $emerald;
+    }
+    &.by-month {
+      border-color: #979797;
+      color: #979797;
+    }
+    &.by-week {
+      border-color: #BFBFBF;
+      color: #BFBFBF;
+    }
+  }
+}
+
+.list-last-transaction {
+  font-family: 'Roboto Condensed', sans-serif;
+  @include font-size(28);
+  font-weight: 400;
+}
+
+
+.Toastify__toast-container--top-center{
+  //margin-left: -250px;
+  text-align: left;
+}

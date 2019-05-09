@@ -1,0 +1,40 @@
+.token-list {
+  .card {
+    border-width: 0 0 0 0;
+    border-left: 4px solid $blue-sky;
+  }
+  ul {
+    border-left-style: dashed !important;
+    border-left-color: #638595;
+  }
+  li li {
+    @include font-size(14);
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  p {
+    @include font-size(32);
+    font-weight: 600;
+    line-height: 1;
+
+    small {
+      color: #7E97A3;
+      @include font-size(14);
+      font-weight: 300;
+    }
+  }
+
+  .data-address {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .btn-copy-address {
+    border: none;
+    padding: 0;
+    margin-left: 10px !important;
+    font-size: 20px;
+    line-height: 1;
+  }
+}

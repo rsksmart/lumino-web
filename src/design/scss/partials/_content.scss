@@ -1,0 +1,108 @@
+main {
+  min-height: 100vh;
+}
+
+.top-bar {
+  height: 75px;
+  background: $blue-darken;
+}
+
+.graphics-container {
+  max-width: 1140px;
+}
+
+.address-header {
+
+}
+
+.last-movements {
+  p {
+    @include font-size(12);
+  }
+
+  span {
+    @include font-size(24);
+    font-weight: 700;
+  }
+
+  .border-bottom {
+    border-bottom-style: dashed !important;
+    border-bottom-color: rgba(255,255,255,.3) !important;
+  }
+
+  .last-movements__info {
+    span {
+      color: darken($white, 15%);
+    }
+  }
+
+  .last-movements__received {
+    span {
+      color: #14D944;
+    }
+  }
+
+  .last-movements__sent {
+    span {
+      color: #149DD9;
+    }
+  }
+
+  .last-movements__pending {
+    span {
+      color: #D9A114;
+    }
+  }
+
+  .last-movements__failed {
+    span {
+      color: #d93528;
+    }
+  }
+}
+
+.list-sort-graphic {
+  width: 100px;
+
+  li {
+    border-left: 8px solid transparent;
+    @include font-size(12);
+    font-weight: 400;
+    text-align: center;
+
+    &.by-year {
+      border-color: $emerald;
+      color: $emerald;
+    }
+    &.by-month {
+      border-color: #979797;
+      color: #979797;
+    }
+    &.by-week {
+      border-color: #BFBFBF;
+      color: #BFBFBF;
+    }
+  }
+}
+
+.list-last-transaction {
+  font-family: 'Roboto Condensed', sans-serif;
+  @include font-size(28);
+  font-weight: 400;
+}
+
+.filters-bar {
+  background: $blue-darken;
+}
+
+.token-list-container {
+  @include font-size(14);
+
+  li + li {
+    border-left: 1px dashed #638595;
+  }
+}
+
+.op-3 {
+  opacity: .3;
+}

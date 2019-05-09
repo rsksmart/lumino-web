@@ -1,0 +1,48 @@
+.channel-list {
+  .card {
+    border-width: 0 0 0 0;
+    border-left: 4px solid $blue-darken;
+  }
+
+  li li {
+    @include font-size(16);
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  p {
+    @include font-size(32);
+    font-weight: 600;
+    line-height: 1;
+
+    small {
+      color: #7E97A3;
+      @include font-size(18);
+      font-weight: 300;
+    }
+  }
+
+  .badge {
+    @include font-size(16);
+    font-weight: 400;
+  }
+}
+
+.channel-circle-item {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background: $blue-darken;
+
+  i {
+    line-height: 70px;
+  }
+}
+.channel-balance-item {
+  top: 50%;
+  left: 100%;
+  transform: translateX(-20%) translateY(-50%);
+
+  &.right-balance {
+    left: 0;
+  }
+}
