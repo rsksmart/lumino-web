@@ -18,7 +18,7 @@ If you don't plan to modify the source code, please use the production build.
 
 ## Build RIF Lumino WEB from code
 
-1. Get the [RELEASE.NUMBER] code from [GITHUB.URL]
+1. Get the code by cloning this repo
 2. Go to the path you downloaded or cloned Lumino's code (lets call this path `$RIF_LUMINO_WEB_PATH`)
 
 3. Run ```yarn install```
@@ -92,5 +92,8 @@ yarn --version
 
 ## Useful Links
 
-* [RIF Lumino Network](https://www.rifos.org/rif-lumino-network/)
+* [RIF Lumino Network documentation](https://www.rifos.org/rif-lumino-network/)
 * [RIF Lumino Explorer](http://explorer.lumino.rifos.org/)
+* [RIF Lumino Contracts](https://github.com/rsksmart/lumino-contracts) 
+* [RIF Lumino Network](https://github.com/rsksmart/lumino) 
+* [RIF Lumino Explorer](https://github.com/rsksmart/lumino-explorer) 
