@@ -10,6 +10,7 @@
     "bootstrap": "^4.3.1",
     "date-fns": "^1.30.1",
     "glamor": "2.20.40",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "^16.8.2",
