@@ -1,6 +1,7 @@
 import client from "../restClient";
 import { DASHBOAR_DATA_SUCCEED } from "./types";
 import { retrieveTokensData } from "../lib/tokens/tokensLogic";
+import {setPriceInfo} from "../services/external/exchangeServices";
 
 export const pollDashboard =  () => async (dispatch, getState) => {
     //var response = await getTokenApp();
@@ -8,7 +9,8 @@ export const pollDashboard =  () => async (dispatch, getState) => {
         client
             .get(`/api/v1/dashboardLumino`)
             .then(async response => {
-                const tokens = await retrieveTokensData(response.data.data_token);
+                let tokens = await retrieveTokensData(response.data.data_token);
+                tokens = await setPriceInfo(tokens);
                 return resolve(dispatch(pollSucceed(response.data, tokens)));
             })
             .catch(error => {

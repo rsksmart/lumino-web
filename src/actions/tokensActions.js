@@ -14,6 +14,7 @@ import { toWei } from "../lib/amounts/weiConversion";
 import { getDecimals } from "../lib/tokens/tokensLogic";
 import { decrementPendingTask, displayToast } from "./actionUtils";
 import {getTokenApp} from "./tokenAppActions";
+import {setPriceInfo} from "../services/external/exchangeServices";
 
 export const leaveNetwork = tokenAddress => async (dispatch, getState) => {
     await getTokenApp("leaveNetwork");
@@ -75,6 +76,7 @@ export const pollTokens = () => (dispatch, getState) =>
             .get(`/api/v1/tokens`)
             .then(async response => {
                 let tokens = await retrieveTokensData(response.data);
+                tokens = await setPriceInfo(tokens);
                 tokens = await getNetworkJoinable(tokens);
                 //  Chequear los que estan en joineando
                 return resolve(

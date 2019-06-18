@@ -7,5 +7,6 @@ export const toWei = (amount, decimals) => {
 
 export const fromWei = (amount, decimals) => {
     amount = new BigNumber(amount);
-    return amount.dividedBy(Math.pow(10, decimals)).toString(10);
+    let result = amount.dividedBy(Math.pow(10, decimals)).toString(10);
+    return result;
 };

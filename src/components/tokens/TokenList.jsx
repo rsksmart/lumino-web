@@ -71,6 +71,10 @@ export default class TokenList extends Component {
           balance={e.balance / Math.pow(10, e.decimals)}
           address={e.address}
           joineable={e.joineable}
+          unitPrice={e.unitPrice}
+          unitPriceCurrency={e.unitPriceCurrency}
+          totalWithCurrency={e.totalWithCurrency}
+          dayAgoPercentageVariationPrice={e.dayAgoPercentageVariationPrice}
           openLeaveNetworkModal={this.openLeaveModal}
           openJoinNetworkModal={this.openJoinModal}
         />
