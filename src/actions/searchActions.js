@@ -1,4 +1,4 @@
-import client from "../restClient";
+import client from "../restClient/index";
 import {
   NO_SUGGESTIONS,
   CLEAR_SUGGESTIONS,
@@ -10,28 +10,28 @@ import {
 import { mapSuggestions } from "./actionUtils";
 
 export const onSuggestionsFetchRequested = query => (dispatch, getState) =>
-  new Promise((resolve, reject) =>
-    client
-      .get("/api/v1/searchLumino", {
-        params: {
-          query: query
-        }
-      })
-      .then(response => {
-        if (response) {
-          let mappedResponse = mapSuggestions(response.data);
-          if (mappedResponse.length === 0) {
-            dispatch(noSuggestions(true));
-          } else {
-            dispatch(noSuggestions(false));
-          }
-          return dispatch(maybeUpdateSuggestions(mappedResponse));
-        }
-      })
-      .catch(error => {
-        console.log(JSON.stringify(error));
-      })
-  );
+    new Promise((resolve, reject) =>
+        client
+            .get("/api/v1/searchLumino", {
+              params: {
+                query: query
+              }
+            })
+            .then(response => {
+              if (response) {
+                let mappedResponse = mapSuggestions(response.data);
+                if (mappedResponse.length === 0) {
+                  dispatch(noSuggestions(true));
+                } else {
+                  dispatch(noSuggestions(false));
+                }
+                return dispatch(maybeUpdateSuggestions(mappedResponse));
+              }
+            })
+            .catch(error => {
+              console.log(JSON.stringify(error));
+            })
+    );
 
 export const onChange = (event, { newValue }) => ({
   type: UPDATE_INPUT_VALUE,

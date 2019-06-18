@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import client from "../../restClient";
+import client from "../../restClient/index";
 import { mapSuggestions } from "../../actions/actionUtils";
 import { bindActionCreators } from "redux";
 import { Modal, Button } from "react-bootstrap";
@@ -101,10 +101,10 @@ class AddChannelModal extends Component {
     const { partner } = { ...this.props };
     this.props.incrementTaskPending(getTaskDetail("openChannel", this.state));
     this.props.putChannel(
-      partner ? partner : this.state.inputAddress,
-      this.state.inputToken,
-      this.state.inputAmount,
-      this.state.inputSettleTimeOut
+        partner ? partner : this.state.inputAddress,
+        this.state.inputToken,
+        this.state.inputAmount,
+        this.state.inputSettleTimeOut
     );
     return this.props.handleClose();
   };
@@ -112,56 +112,56 @@ class AddChannelModal extends Component {
   render() {
     const { partner } = { ...this.props };
     return (
-      <Modal show={this.props.show} onHide={this.props.handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Create New Channel</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="form-group">
-            <SearchSuggestion
-              placeholder={"Partner address"}
-              suggestions={this.state.partnerSuggestions}
-              value={partner ? partner : this.state.inputAddress}
-              onSuggestionsFetchRequested={this.fetchPaymentSuggestions}
-              onSuggestionsClearRequested={
-                this.onPartnerSuggestionsClearRequested
-              }
-              onChange={this.handleChangeAddress}
-              onSuggestionSelected={this.onPartnerSelected}
-            />
-          </div>
-          <div className="form-group">
-            <SearchSuggestion
-              placeholder={"Token address"}
-              suggestions={this.state.tokensSuggestions}
-              value={this.state.inputToken}
-              onSuggestionsFetchRequested={this.getTokensSuggestions}
-              onSuggestionsClearRequested={
-                this.onTokenSuggestionsClearRequested
-              }
-              onChange={this.handleChangeToken}
-              onSuggestionSelected={this.onTokenSelected}
-            />
-          </div>
-          <div className="form-group">
-            <NumberFormat
-              value={this.state.inputAmount}
-              className="form-control shadow-none"
-              placeholder={"Amount"}
-              onValueChange={this.handleChangeAmount}
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className="btn-pay border-0 btn-block py-3"
-            variant="primary"
-            onClick={this.handleOpenChannel}
-          >
-            Create
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal show={this.props.show} onHide={this.props.handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Create New Channel</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="form-group">
+              <SearchSuggestion
+                  placeholder={"Partner address"}
+                  suggestions={this.state.partnerSuggestions}
+                  value={partner ? partner : this.state.inputAddress}
+                  onSuggestionsFetchRequested={this.fetchPaymentSuggestions}
+                  onSuggestionsClearRequested={
+                    this.onPartnerSuggestionsClearRequested
+                  }
+                  onChange={this.handleChangeAddress}
+                  onSuggestionSelected={this.onPartnerSelected}
+              />
+            </div>
+            <div className="form-group">
+              <SearchSuggestion
+                  placeholder={"Token address"}
+                  suggestions={this.state.tokensSuggestions}
+                  value={this.state.inputToken}
+                  onSuggestionsFetchRequested={this.getTokensSuggestions}
+                  onSuggestionsClearRequested={
+                    this.onTokenSuggestionsClearRequested
+                  }
+                  onChange={this.handleChangeToken}
+                  onSuggestionSelected={this.onTokenSelected}
+              />
+            </div>
+            <div className="form-group">
+              <NumberFormat
+                  value={this.state.inputAmount}
+                  className="form-control shadow-none"
+                  placeholder={"Amount"}
+                  onValueChange={this.handleChangeAmount}
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+                className="btn-pay border-0 btn-block py-3"
+                variant="primary"
+                onClick={this.handleOpenChannel}
+            >
+              Create
+            </Button>
+          </Modal.Footer>
+        </Modal>
     );
   }
 }
@@ -181,6 +181,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AddChannelModal);

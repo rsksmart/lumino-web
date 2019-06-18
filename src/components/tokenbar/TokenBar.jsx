@@ -6,7 +6,7 @@ export default class TokenBar extends Component {
     render =()=> {
         let tokenBarItemList = this.props.tokenList.map((e)=>{
             let balance = fromWei(e.balance, e.decimals);
-            return <TokenBarItem name={e.name} key={e.name} balance={balance} fiat={e.fiat}/>
+            return <TokenBarItem name={e.name} key={e.name} balance={balance} unitPrice={e.unitPrice} unitPriceCurrency={e.unitPriceCurrency} dayAgoPercentageVariationPrice={e.dayAgoPercentageVariationPrice}/>
         });
 
         return <ul className="list-unstyled justify-content-center align-items-center token-list-container m-0 d-flex">
