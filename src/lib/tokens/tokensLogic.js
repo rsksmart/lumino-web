@@ -4,7 +4,6 @@ import {tokenAbi} from "./raidenERC20StandardAbi";
 import ERC20Token from "./models/ERC20Token";
 import {USER_ADDRESS} from "../../config/applicationConstants";
 
-
 export const retrieveTokensData =async (tokenAddressses) => {
     const web3 = new Web3(new Web3.providers.HttpProvider(RSK_RPC_ENDPOINT));
     let tokensData= [];
@@ -21,7 +20,6 @@ export const retrieveTokenData = async (address, web3) =>{
     const symbol = await contract.methods.symbol.call({gasPrice: 21000});
     const decimals = await contract.methods.decimals.call({gasPrice: 21000});
     const balance = await contract.methods.balanceOf( USER_ADDRESS).call({gasPrice: 21000});
-
     return new ERC20Token(address, name,symbol,decimals, balance);
 };
 
