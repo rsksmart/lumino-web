@@ -9,7 +9,7 @@ import {
 } from "../../actions/channelsActions";
 import PollingContainer from "../../genericContainers/PollingContainer";
 import "react-toastify/dist/ReactToastify.css";
-import { quickPayment } from "../../actions/paymentsActions";
+import { quickPayment, invoicePayment } from "../../actions/paymentsActions";
 import ChannelList from "../../components/channels/ChannelList";
 import FiltersChannels from "../../components/filtersChannels/FiltersChannels";
 import {
@@ -73,6 +73,10 @@ class ChannelsContainer extends Component {
   handleQuickPayments = (partnerAddress, tokenAddress, totalDeposit) => {
     this.props.quickPayment(partnerAddress, tokenAddress, totalDeposit);
   };
+
+  handleInvoicePayment = (invoice) => {
+    this.props.invoicePayment(invoice)
+  }
 
   handleOpenQuickPayment = () => {
     this.setState({ showQuickPayment: true });
@@ -190,6 +194,7 @@ class ChannelsContainer extends Component {
                 closeChannel={(a, b) => this.handleCloseChannel(a, b)}
                 depositChannel={this.handleDepositChannel}
                 payChannel={(a, b, c) => this.handleQuickPayments(a, b, c)}
+                payInvoiceChannel={(invoice) => this.handleInvoicePayment(invoice)}
                 tokens={this.props.tokens}
                 selectedSuggestion={this.props.selectedSuggestion}
             />
@@ -198,6 +203,8 @@ class ChannelsContainer extends Component {
               show={this.state.showQuickPayment}
               handleClose={this.handleCloseQuickPayment}
               title={"Send Tokens"}
+              incrementTaskPending={this.props.incrementTaskPending}
+              invoicePayment={this.props.invoicePayment}
           />
           <AddChannelModal
               handleClose={this.handleClose}
@@ -228,6 +235,7 @@ const mapDispatchToProps = dispatch => {
     closeChannel: closeChannel,
     depositChannel: depositChannel,
     quickPayment: quickPayment,
+    invoicePayment: invoicePayment,
     pollTokens: pollTokens,
     selectedSuggestion: selectedSuggestion
   };
