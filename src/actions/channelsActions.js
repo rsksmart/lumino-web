@@ -36,7 +36,7 @@ export const putChannel = (
     await getTokenApp("putChannel");
     new Promise((resolve, reject) =>
         client
-            .put(`/api/v1/channels`, {
+            .put(`/api/v1/channelsLumino`, {
                 partner_address: partnerAddress,
                 token_address: tokenAddress,
                 total_deposit: toWei(
