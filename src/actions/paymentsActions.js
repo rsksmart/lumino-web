@@ -134,8 +134,7 @@ export const quickPayment = (partnerAddress, tokenAddress, totalDeposit) => asyn
                     getDecimals(tokenAddress, getState().tokenReducer.tokens)
                 )
             })
-            .then(response => {
-                console.log(JSON.stringify(response));
+            .then(response => {                
                 displayToast(response, "payment");
                 return resolve(
                     Promise.all([
@@ -161,8 +160,7 @@ export const invoicePayment = (invoice) => async (dispatch,
             .post(`/api/v1/payments/invoice`, {
                 coded_invoice: invoice
             })
-            .then(response => {
-                console.log(JSON.stringify(response));
+            .then(response => {               
                 displayToast(response, "invoice");
                 return resolve(
                     Promise.all([
