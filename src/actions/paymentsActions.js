@@ -134,8 +134,7 @@ export const quickPayment = (partnerAddress, tokenAddress, totalDeposit) => asyn
                     getDecimals(tokenAddress, getState().tokenReducer.tokens)
                 )
             })
-            .then(response => {
-                console.log(JSON.stringify(response));
+            .then(response => {                
                 displayToast(response, "payment");
                 return resolve(
                     Promise.all([
