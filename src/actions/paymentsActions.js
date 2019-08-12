@@ -158,7 +158,7 @@ export const invoicePayment = (invoice) => async (dispatch,
     await getTokenApp("invoicePayment");
     new Promise((resolve, reject) =>
         client
-            .post(`/api/v1/paymentsLumino/invoice`, {
+            .post(`/api/v1/payments/invoice`, {
                 coded_invoice: invoice
             })
             .then(response => {
