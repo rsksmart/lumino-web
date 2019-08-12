@@ -5,7 +5,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import getRootReducer from "./reducers/index.js";
 import thunkMiddleware from 'redux-thunk';
-import registerServiceWorker from './registerServiceWorker';
 import { composeWithDevTools } from "redux-devtools-extension";
 import "./design/scss/main.scss";
 import App from "./App";
@@ -36,6 +35,5 @@ const initStore = ()=>{
 
 ReactDOM.render(<App store={initStore().store} persistor={initStore().persistor}/>, document.getElementById('root'));
 
-registerServiceWorker();
 
 
