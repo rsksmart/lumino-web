@@ -160,8 +160,7 @@ export const invoicePayment = (invoice) => async (dispatch,
             .post(`/api/v1/paymentsLumino/invoice`, {
                 coded_invoice: invoice
             })
-            .then(response => {
-                console.log(JSON.stringify(response));
+            .then(response => {               
                 displayToast(response, "invoice");
                 return resolve(
                     Promise.all([
