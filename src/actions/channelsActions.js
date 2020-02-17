@@ -85,6 +85,17 @@ export const depositChannel = (
     balance
 ) => async (dispatch, getState) => {
     await getTokenApp("depositChannel");
+    let total_deposit = "";
+    await client
+    .get(`/api/v1/channels/${tokenAddress}/${partnerAddress}`)
+    .then(response => {
+        total_deposit = response.data.total_deposit;
+    })
+    .catch(error => {
+        console.log(JSON.stringify(error));
+        displayToast(error.response, null);
+        return resolve(dispatch(decrementPendingTask(TASK_FAILED)));
+    })
     new Promise((resolve, reject) =>
         client
             .patch(`/api/v1/channels/${tokenAddress}/${partnerAddress}`, {
@@ -94,7 +105,7 @@ export const depositChannel = (
                             totalDeposit,
                             getDecimals(tokenAddress, getState().tokenReducer.tokens)
                         )
-                    ) + Number(balance)
+                    ) + Number(total_deposit)
             })
             .then(response => {
                 displayToast(response, "deposit_channel");
