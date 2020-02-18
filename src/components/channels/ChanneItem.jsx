@@ -76,8 +76,7 @@ export default class ChannelItem extends Component {
     this.props.depositChannel(
       this.props.token,
       this.props.partner,
-      this.state.inputAmount,
-      this.props.balance
+      this.state.inputAmount
     );
     this.handleClose();
   };

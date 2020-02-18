@@ -59,14 +59,12 @@ class ChannelsContainer extends Component {
   handleDepositChannel = (
       tokenAddress,
       partnerAddress,
-      totalDeposit,
-      balance
+      totalDeposit
   ) => {
     this.props.depositChannel(
         tokenAddress,
         partnerAddress,
-        totalDeposit,
-        balance
+        totalDeposit
     );
   };
 
