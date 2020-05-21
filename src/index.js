@@ -1,20 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import getRootReducer from "./reducers/index.js";
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from "redux-devtools-extension";
 import "./design/scss/main.scss";
-
-import thunkMiddleware from "redux-thunk";
 import App from "./App";
 
-//Create the store with thunk middleware and the root reducer. Adds the swagger rest client as parameter for thunk
-const getStore = initialState => {
+//Create the store with thunk middleware and the root reducer.
+const initStore = ()=>{
+
+  const persistConfig = {
+    key : "root",
+    storage,
+  };
+
+  const persistedReducer = persistReducer(persistConfig, getRootReducer);
+
   const enhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
-  return createStore(getRootReducer, initialState, enhancer);
+
+  const store = createStore(
+      persistedReducer,
+      enhancer
+  );
+
+  const persistor = persistStore(store);
+
+  return {store , persistor};
+
 };
 
-const Store = getStore();
 
-ReactDOM.render(<App store={Store} />, document.getElementById("root"));
+ReactDOM.render(<App store={initStore().store} persistor={initStore().persistor}/>, document.getElementById('root'));
+
+
 
