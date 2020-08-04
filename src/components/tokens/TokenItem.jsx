@@ -17,9 +17,14 @@ export default class TokenItem extends Component {
                             </Clipboard>
                         </li>
                         <li><b>Balance:</b> <span className="text-blue">{this.props.balance}</span></li>
-                        <li><b>Unit Price: $ </b> <span className="text-blue">{this.props.unitPrice}</span> {this.props.unitPriceCurrency}  ({this.props.dayAgoPercentageVariationPrice}%) </li>
-                        <li><b>Total: $ </b> <span className="text-blue">{this.props.totalWithCurrency}</span> {this.props.unitPriceCurrency}</li>
-                    </ul>
+                        {
+                            this.props.unitPrice &&
+                                <>
+                                    <li><b>Unit Price: $ </b> <span className="text-blue">{this.props.unitPrice}</span> {this.props.unitPriceCurrency} </li>
+                                    <li><b>Total: $ </b> <span className="text-blue">{this.props.totalWithCurrency}</span> {this.props.unitPriceCurrency}</li>
+                                </>
+                        }
+                   </ul>
 
                     {this.props.joineable && <button className="btn btn-join-network text-center ml-3 ml-md-auto text-white h-100 py-md-4 my-3 my-md-0" onClick={()=>this.props.openJoinNetworkModal(this.props.address)}>
                         <i className="fal fa-plus fa-2x"></i>
