@@ -112,6 +112,13 @@ export const getTaskDetail = (action, state) => {
       taskDetail.detail =
         "Token: " + taskDetail.token + "\nPartner: " + taskDetail.partner;
       break;
+    case "paymentInvoice":
+      taskDetail.invoice = state.invoice;
+      taskDetail.type = "paymentInvoice";
+      taskDetail.typeLabel = "Payment Invoice";
+      taskDetail.detail =
+          "Invoice: " + taskDetail.invoice;
+      break;
     default:
       return null;
   }
@@ -191,6 +198,14 @@ const buildSuccessMessage = (dataParam, operationType) => {
         dataParam.amount +
         "\n was successfully sent to the partner " +
         dataParam.target_address;
+      message = { title: "Transfer successful", body: body };
+      break;
+    case "invoice":
+      body =
+          "A payment of: " +
+          dataParam.amount +
+          "\n was successfully sent to the partner " +
+          dataParam.target_address;
       message = { title: "Transfer successful", body: body };
       break;
     case "join_network":

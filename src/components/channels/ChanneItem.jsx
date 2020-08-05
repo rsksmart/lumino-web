@@ -12,6 +12,8 @@ import { fromWei } from "../../lib/amounts/weiConversion";
 
 import { getTaskDetail } from "../../actions/actionUtils";
 import Link from "react-router-dom/es/Link";
+import Switch from "react-switch";
+import InvoiceForm from "../../components/billing/InvoiceForm"
 
 export default class ChannelItem extends Component {
   constructor(props, context) {
@@ -23,7 +25,9 @@ export default class ChannelItem extends Component {
       showChannel: false,
 
       inputAmount: "",
-      inputSettleTimeOut: 500
+      inputSettleTimeOut: 500,
+      checked: false,
+      coded_invoice: ""
     };
 
     this.handleShow = this.handleShow.bind(this);
@@ -36,6 +40,12 @@ export default class ChannelItem extends Component {
     this.handleChangeAmountPayment = this.handleChangeAmountPayment.bind(this);
     this.handleMakePayment = this.handleMakePayment.bind(this);
     this.handleCloseChannel = this.handleCloseChannel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleValueInvoiceChange = this.handleValueInvoiceChange.bind(this);
+  }
+
+  handleChange(checked) {
+    this.setState({ checked });
   }
 
   handleClose() {
@@ -85,6 +95,10 @@ export default class ChannelItem extends Component {
     this.setState({ inputAmount: event.value });
   }
 
+  handleValueInvoiceChange(event) {
+    this.setState({ coded_invoice: event.currentTarget.value.trim() });
+  }
+
   handleMakePayment() {
     this.props.incrementTaskPending(
       getTaskDetail("payment", {
@@ -96,6 +110,18 @@ export default class ChannelItem extends Component {
       this.props.partner,
       this.props.token,
       this.state.inputAmount
+    );
+    this.handleClosePayment();
+  }
+
+  handleMakePaymentInvoice() {
+    this.props.incrementTaskPending(
+        getTaskDetail("paymentInvoice", {
+          invoice: this.state.coded_invoice,
+        })
+    );
+    this.props.payInvoiceChannel(
+        this.state.coded_invoice
     );
     this.handleClosePayment();
   }
@@ -124,6 +150,38 @@ export default class ChannelItem extends Component {
       },
       type: CHANNEL
     };
+
+    let paymentForm = ( <div className="form-group">
+      <NumberFormat
+          value={this.state.inputAmount}
+          className="form-control shadow-none"
+          placeholder={"Amount"}
+          onValueChange={e => this.handleChangeAmountPayment(e)}
+      />
+    </div>);
+
+    let paymentSubmitButton = (<Button
+        className="btn-pay border-0 btn-block py-3"
+        variant="primary"
+        onClick={() => this.handleMakePayment()}
+    >
+      PAY
+    </Button>);
+
+    if (this.state.checked){
+      paymentForm = <InvoiceForm
+          handleValueInvoiceChange={(value) => this.handleValueInvoiceChange(value)}
+          value={this.state.coded_invoice}
+          quickPayment={false}/>
+
+      paymentSubmitButton = (<Button
+          className="btn-pay border-0 btn-block py-3"
+          variant="primary"
+          onClick={() => this.handleMakePaymentInvoice()}
+      >
+        PAY
+      </Button>)
+    }
 
     switch (this.props.state) {
       case STATE_OPENED:
@@ -241,25 +299,18 @@ export default class ChannelItem extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title>Payment</Modal.Title>
+            <div className={"invoice-switch-left"}>
+              <span>Invoice</span>
+              <Switch className="switch-invoice" onChange={this.handleChange} checked={this.state.checked} />
+            </div>
           </Modal.Header>
           <Modal.Body>
-            <div className="form-group">
-              <NumberFormat
-                value={this.state.inputAmount}
-                className="form-control shadow-none"
-                placeholder={"Amount"}
-                onValueChange={e => this.handleChangeAmountPayment(e)}
-              />
-            </div>
+           {paymentForm}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              className="btn-pay border-0 btn-block py-3"
-              variant="primary"
-              onClick={() => this.handleMakePayment()}
-            >
-              PAY
-            </Button>
+
+            {paymentSubmitButton}
+
           </Modal.Footer>
         </Modal>
 
@@ -292,3 +343,19 @@ export default class ChannelItem extends Component {
     );
   };
 }
+
+
+const PaymentForm = (props) => {
+  return (
+      <div className="form-group">
+        <NumberFormat
+            value={props.inputAmount}
+            className="form-control shadow-none"
+            placeholder={"Amount"}
+            onValueChange={e => this.handleChangeAmountPayment(e)}
+        />
+      </div>
+  );
+}
+
+

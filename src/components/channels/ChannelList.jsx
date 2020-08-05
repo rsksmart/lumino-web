@@ -23,6 +23,7 @@ export default class ChannelList extends Component {
             closeChannel={this.props.closeChannel}
             depositChannel={this.props.depositChannel}
             payChannel={this.props.payChannel}
+            payInvoiceChannel={this.props.payInvoiceChannel}
             tokenDecimals={decimals}
             incrementTaskPending={this.props.incrementTaskPending}
             selectedSuggestion={this.props.selectedSuggestion}

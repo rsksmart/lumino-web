@@ -18,6 +18,8 @@ import TasksTable from "../../components/tables/TasksTable";
 import { USER_ADDRESS } from "../../config/applicationConstants";
 import QuickPayment from "../payments/QuickPayment";
 import Clipboard from "react-clipboard.js";
+import {incrementTaskPending} from "../../actions/taskActions";
+import {invoicePayment} from "../../actions/paymentsActions";
 
 class HeaderContainer extends Component {
   constructor(props, context) {
@@ -200,7 +202,13 @@ class HeaderContainer extends Component {
           <Modal.Body>{tableTasks}</Modal.Body>
           <Modal.Footer />
         </Modal>
-        <QuickPayment show={this.state.show} handleClose={this.handleClose} title={"Quick Payment"} />
+        <QuickPayment
+            show={this.state.show}
+            handleClose={this.handleClose}
+            title={"Quick Payment"}
+            incrementTaskPending={this.props.incrementTaskPending}
+            invoicePayment={this.props.invoicePayment}
+        />
       </header>
     );
   };
@@ -226,7 +234,9 @@ const mapDispatchToProps = dispatch => {
     onSuggestionsFetchRequested: onSuggestionsFetchRequested,
     onSuggestionsClearRequested: onSuggestionsClearRequested,
     loadSuggestionsBegin: loadSuggestionsBegin,
-    selectedSuggestion: selectedSuggestion
+    selectedSuggestion: selectedSuggestion,
+    incrementTaskPending: incrementTaskPending,
+    invoicePayment : invoicePayment
   };
 
   return bindActionCreators(actions, dispatch);
