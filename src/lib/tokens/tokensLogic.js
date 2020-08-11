@@ -16,9 +16,9 @@ export const retrieveTokensData =async (tokenAddressses) => {
 
 export const retrieveTokenData = async (address, web3) =>{
     let contract = new web3.eth.Contract(tokenAbi, address);
-    const name = await contract.methods.name.call({gasPrice: 21000});
-    const symbol = await contract.methods.symbol.call({gasPrice: 21000});
-    const decimals = await contract.methods.decimals.call({gasPrice: 21000});
+    const name = await contract.methods.name().call({gasPrice: 21000});
+    const symbol = await contract.methods.symbol().call({gasPrice: 21000});
+    const decimals = await contract.methods.decimals().call({gasPrice: 21000});
     const balance = await contract.methods.balanceOf( USER_ADDRESS).call({gasPrice: 21000});
     return new ERC20Token(address, name,symbol,decimals, balance);
 };
