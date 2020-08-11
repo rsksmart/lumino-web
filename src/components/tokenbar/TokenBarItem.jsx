@@ -13,8 +13,12 @@ export default class fiatTokenBarItem extends Component {
                 {this.props.unitPrice}
                 <small className="ml-1 op-3">{this.props.unitPriceCurrency}</small>
             </span>
-            <span className="w-600 d-block">
-                ({this.props.dayAgoPercentageVariationPrice}%)
-            </span>
+            {
+                this.props.dayAgoPercentageVariationPrice && (
+                    <span className="w-600 d-block">
+                        ({this.props.dayAgoPercentageVariationPrice}%)
+                    </span>
+                )
+            }
         </li>
 }
