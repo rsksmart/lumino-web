@@ -154,27 +154,21 @@ export const quickPayment = (partnerAddress, tokenAddress, totalDeposit) => asyn
 
 export const invoicePayment = (invoice) => async (dispatch,
     getState) => {
-    await getTokenApp("invoicePayment");
-    new Promise((resolve, reject) =>
-        client
-            .post(`/api/v1/payments/invoice`, {
-                coded_invoice: invoice
-            })
-            .then(response => {               
-                displayToast(response, "invoice");
-                return resolve(
-                    Promise.all([
-                        dispatch(decrementPendingTask(TASK_COMPLETE)),
-                        dispatch(paymentSuccess(response.data))
-                    ])
-                );
-            })
-            .catch(error => {
-                console.log(JSON.stringify(error));
-                displayToast(error.response, null);
-                return resolve(dispatch(decrementPendingTask(TASK_FAILED)));
-            })
-    );
+    try {
+        await getTokenApp("invoicePayment");
+        const response = await client.post(`/api/v1/payments/invoice`, {
+            coded_invoice: invoice
+        });
+        displayToast(response, "invoice");
+        await Promise.all([
+            dispatch(decrementPendingTask(TASK_COMPLETE)),
+            dispatch(paymentSuccess(response.data))
+        ]);
+    } catch(error) {
+        console.log(JSON.stringify(error));
+        displayToast(error.response, null);
+        dispatch(decrementPendingTask(TASK_FAILED));
+    }
 }
 
 

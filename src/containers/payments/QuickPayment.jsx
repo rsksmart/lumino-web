@@ -134,7 +134,7 @@ class QuickPayment extends Component {
   };
 
   handleQuickPaymentInvoice = () => {
-    const { invoicePayment } = { ...this.props };
+    const { invoicePayment } = this.props;
     this.props.incrementTaskPending(
         getTaskDetail("paymentInvoice", {
           invoice: this.state.coded_invoice,
