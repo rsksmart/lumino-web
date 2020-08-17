@@ -343,19 +343,3 @@ export default class ChannelItem extends Component {
     );
   };
 }
-
-
-const PaymentForm = (props) => {
-  return (
-      <div className="form-group">
-        <NumberFormat
-            value={props.inputAmount}
-            className="form-control shadow-none"
-            placeholder={"Amount"}
-            onValueChange={e => this.handleChangeAmountPayment(e)}
-        />
-      </div>
-  );
-}
-
-

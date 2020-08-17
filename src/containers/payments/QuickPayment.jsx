@@ -9,7 +9,7 @@ import {
   onSuggestionsFetchRequested
 } from "../../actions/searchActions";
 import SearchSuggestion from "../../components/search/SearchSuggestion";
-import { quickPayment, invoicePayment } from "../../actions/paymentsActions";
+import { quickPayment } from "../../actions/paymentsActions";
 import { getName } from "../../lib/tokens/tokensLogic";
 import { TOKEN } from "../../lib/search/searchConstants";
 import client from "../../restClient";
