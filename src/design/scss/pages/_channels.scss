@@ -46,3 +46,32 @@
     left: 0;
   }
 }
+
+.invoice-switch-left {
+  position: relative;
+  left: 120px;
+}
+
+.invoice-switch-left-quick-payment {
+  position: relative;
+  left: 96px;
+}
+
+.invoice-form-textarea-quick-payment{
+  alignment: center;
+  position: relative;
+  left: 15px;
+  width: 470px;
+  height: 200px;
+}
+
+.switch-invoice{
+  position: relative;
+  top: 7px;
+  padding-left: 10px;
+}
+
+.invoice-form-textarea{
+  width: 470px;
+  height: 200px;
+}

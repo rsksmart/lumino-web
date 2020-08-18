@@ -134,7 +134,7 @@ export const quickPayment = (partnerAddress, tokenAddress, totalDeposit) => asyn
                     getDecimals(tokenAddress, getState().tokenReducer.tokens)
                 )
             })
-            .then(response => {
+            .then(response => {                
                 displayToast(response, "payment");
                 return resolve(
                     Promise.all([
@@ -149,6 +149,26 @@ export const quickPayment = (partnerAddress, tokenAddress, totalDeposit) => asyn
                 return resolve(dispatch(decrementPendingTask(TASK_FAILED)));
             })
     );
+}
+
+
+export const invoicePayment = (invoice) => async (dispatch,
+    getState) => {
+    try {
+        await getTokenApp("invoicePayment");
+        const response = await client.post(`/api/v1/payments/invoice`, {
+            coded_invoice: invoice
+        });
+        displayToast(response, "invoice");
+        await Promise.all([
+            dispatch(decrementPendingTask(TASK_COMPLETE)),
+            dispatch(paymentSuccess(response.data))
+        ]);
+    } catch(error) {
+        console.log(JSON.stringify(error));
+        displayToast(error.response, null);
+        dispatch(decrementPendingTask(TASK_FAILED));
+    }
 }
 
 

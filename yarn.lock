@@ -9466,6 +9466,13 @@ react-smooth@~1.0.0:
     raf "^3.4.0"
     react-transition-group "^2.5.0"
 
+react-switch@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-5.0.0.tgz#ecbb666f8789cb8138b3ba1160bc3745390ab502"
+  integrity sha512-+zxY9xj9dMc8Y4gv/kkqQrirfEiIQ+SlQfJDW1Wi81L3xoh1fcbBYyJyh0TnhM/U/b6HxuBmkmU4Ooxgtuoavw==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-table@^6.9.2:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/react-table/-/react-table-6.10.0.tgz#20444b19d8ca3c1a08e7544e5c3a93e4ba56690e"
