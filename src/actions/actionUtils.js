@@ -145,7 +145,13 @@ const getToastDetail = (response, operationType) => {
 const buildErrorMessage = response => {
   let message = { title: "Error", body: "Request Failed" };
   if (response && response.data) {
-    message.body = response.data.errors;
+    const errorData = response.data.errors;
+    if (errorData) {
+      message.body = [];
+      Object.keys(errorData).forEach(errorKey => {
+        message.body.push(errorData[errorKey]);
+      });
+    }
   }
   return message;
 };

@@ -34,19 +34,22 @@ export const putChannel = (
     settleTimeOut
 )  => async (dispatch, getState) => {
     await getTokenApp("putChannel");
+    const total_deposit = toWei(
+        totalDeposit,
+        getDecimals(tokenAddress, getState().tokenReducer.tokens)
+    );
     new Promise((resolve, reject) =>
         client
             .put(`/api/v1/channels`, {
                 partner_address: partnerAddress,
                 token_address: tokenAddress,
-                total_deposit: toWei(
-                    totalDeposit,
-                    getDecimals(tokenAddress, getState().tokenReducer.tokens)
-                ),
+                total_deposit,
                 settle_timeout: settleTimeOut
             })
             .then(response => {
-                displayToast(response, "balance_update");
+                if (total_deposit > 0) {
+                    displayToast(response, "balance_update");
+                }
                 return resolve(dispatch(decrementPendingTask(TASK_COMPLETE)));
             })
             .catch(error => {

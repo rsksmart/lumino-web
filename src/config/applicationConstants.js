@@ -2,4 +2,3 @@
 import {isDevelopment} from "../utils/utils";
 
 export const USER_ADDRESS = isDevelopment() ? process.env.REACT_APP_NODE_ADDRESS : window.nodeAddress;
-console.log(isDevelopment())
