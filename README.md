@@ -7,6 +7,7 @@
 
 1. RIF Lumino Node Running
 2. Yarn (Latest Version)
+3. NodeJS v12.20.2
 
 ## Recomended usage
 
