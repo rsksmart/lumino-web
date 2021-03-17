@@ -14,13 +14,17 @@ import { ALL_STATUSES } from "../../constants/uiConstants";
 
 class ChannelDetailContainer extends Component {
   async componentDidMount() {
-    if (this.props.selectedSuggestion) {
+    const selectedSuggestion = this.getSelectedSuggestion();
+    if (selectedSuggestion) {
+      if (this.props.selectedSuggestion) {
+        sessionStorage.setItem("tempSelectedSuggestion", JSON.stringify(this.props.selectedSuggestion));
+      }
       const actualDate = new Date();
       let oneMonthBefore = new Date().setMonth(actualDate.getMonth() - 1);
       const oneMonthBeforeDate = new Date(oneMonthBefore);
       let channelData = await getChannel(
-        this.props.selectedSuggestion.tokenAddress,
-        this.props.selectedSuggestion.partnerAddress
+        this.getSelectedSuggestion().tokenAddress,
+          this.getSelectedSuggestion().partnerAddress
       );
       this.setState({
         filterInitiator: USER_ADDRESS,
@@ -32,6 +36,21 @@ class ChannelDetailContainer extends Component {
       });
     } else {
       this.props.history.push("/channels");
+    }
+  }
+
+  getSelectedSuggestion() {
+    // TODO: this should be treated as an url param in the future so we can avoid having to save this to session storage
+    //  we should have an url like /channelDetail/<token_address>/<partner_address>
+    if (this.props.selectedSuggestion) {
+      return this.props.selectedSuggestion;
+    } else {
+      const selectedSuggestion = sessionStorage.getItem("tempSelectedSuggestion");
+      if (selectedSuggestion) {
+        return JSON.parse(selectedSuggestion);
+      } else {
+        return null;
+      }
     }
   }
 
@@ -70,8 +89,7 @@ class ChannelDetailContainer extends Component {
   }
 
   resolveRender = () => {
-    const { selectedSuggestion } = { ...this.props };
-    return selectedSuggestion ? (
+    return this.getSelectedSuggestion() ? (
       <PollingContainer
         render={this.renderPolling}
         pollAction={this.getData}
@@ -96,7 +114,7 @@ class ChannelDetailContainer extends Component {
       this.state.filterFromDate,
       this.state.filterToDate,
       this.state.filterStatus,
-      this.props.selectedSuggestion.networkId
+      this.getSelectedSuggestion().networkId
     );
   };
   renderPolling = () => {
@@ -112,7 +130,7 @@ class ChannelDetailContainer extends Component {
     }
     let balanceInTokens = fromWei(
       this.state.myBalance,
-      getDecimals(this.props.selectedSuggestion.tokenAddress, this.props.tokens)
+      getDecimals(this.getSelectedSuggestion().tokenAddress, this.props.tokens)
     );
     return (
         <div className="container-fluid py-5 px-2 my-5">
@@ -132,8 +150,8 @@ class ChannelDetailContainer extends Component {
                 <div className="text-center token-info py-5 py-xl-0">
                   <ul className="list-unstyled mb-0">
                     <li><i className="text-blue fal fa-coins fa-2x"></i></li>
-                    <li className="text-blue"><b>{this.props.selectedSuggestion.tokenName}</b></li>
-                    <li className="text-blue overflow-mobile">{this.props.selectedSuggestion.tokenAddress}</li>
+                    <li className="text-blue"><b>{this.getSelectedSuggestion().tokenName}</b></li>
+                    <li className="text-blue overflow-mobile">{this.getSelectedSuggestion().tokenAddress}</li>
                     <li></li>
                   </ul>
                 </div>
@@ -143,7 +161,7 @@ class ChannelDetailContainer extends Component {
                     {/*<div className="channel-balance-item right-balance bg-white position-absolute rounded px-2 py-1 shadow-sm ">300</div>*/}
                   </div>
                   <p className="text-green overflow-mobile">
-                    {this.props.selectedSuggestion.partnerAddress}
+                    {this.getSelectedSuggestion().partnerAddress}
                   </p>
                 </div>
               </div>
