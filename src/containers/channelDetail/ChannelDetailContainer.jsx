@@ -44,14 +44,12 @@ class ChannelDetailContainer extends Component {
     //  we should have an url like /channelDetail/<token_address>/<partner_address>
     if (this.props.selectedSuggestion) {
       return this.props.selectedSuggestion;
-    } else {
-      const selectedSuggestion = sessionStorage.getItem("tempSelectedSuggestion");
-      if (selectedSuggestion) {
-        return JSON.parse(selectedSuggestion);
-      } else {
-        return null;
-      }
     }
+    const selectedSuggestion = sessionStorage.getItem("tempSelectedSuggestion");
+    if (selectedSuggestion) {
+      return JSON.parse(selectedSuggestion);
+    }
+    return null;
   }
 
   onStatusChange = event => {
