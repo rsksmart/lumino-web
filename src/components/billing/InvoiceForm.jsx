@@ -1,10 +1,6 @@
 import React, {Component} from "react";
 
 export default class InvoiceForm extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render = () => {
 
         let textAreaStyle = "invoice-form-textarea";
