@@ -203,7 +203,6 @@ class ChannelDetailContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.paymentReducer.payments);
   return {
     selectedSuggestion: state.searchReducer.suggestion
       ? state.searchReducer.suggestion.value
