@@ -1,9 +1,25 @@
 import client from "../restClient";
-import { POLL_CHANNELS, TASK_COMPLETE, TASK_FAILED } from "./types";
+import {INIT_CHANNELS, POLL_CHANNELS, TASK_COMPLETE, TASK_FAILED} from "./types";
 import { toWei } from "../lib/amounts/weiConversion";
 import { getDecimals } from "../lib/tokens/tokensLogic";
 import { decrementPendingTask, displayToast } from "./actionUtils";
 import {getTokenApp} from "./tokenAppActions";
+
+export const initChannels = () => (dispatch, getState) =>
+    new Promise((resolve, reject) =>
+        client
+            .get(`/api/v1/channels`)
+            .then(response => {
+                return resolve(
+                    dispatch(
+                        initializeChannels(response.data)
+                    )
+                );
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+            })
+    );
 
 export const pollChannels = () => (dispatch, getState) =>
     new Promise((resolve, reject) =>
@@ -118,10 +134,19 @@ export const depositChannel = (
     );
 };
 
-const pollSucceed = (channels, dataChanged) => ({
-    type: POLL_CHANNELS,
-    data: { channels: channels, channelsChanged: dataChanged }
-});
+const initializeChannels = (channels) => {
+    return {
+        type: INIT_CHANNELS,
+        data: {channels: channels, channelsChanged: false}
+    };
+};
+
+const pollSucceed = (channels, dataChanged) => {
+    return {
+        type: POLL_CHANNELS,
+        data: {channels: channels, channelsChanged: dataChanged}
+    };
+};
 
 const checkChannelsChanged = (prevStateChannels, newStateChannels) => {
     let result = false;
