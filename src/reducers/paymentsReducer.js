@@ -9,7 +9,7 @@ const paymentReducer = createReducer(initialState, {
   [GET_PAYMENTS](state, action) {
     return {
       ...state,
-      payments: action.data.payments
+      payments: [...action.data.payments]
     };
   },
   [POLL_PAYMENTS](state, action) {

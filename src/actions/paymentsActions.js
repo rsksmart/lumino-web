@@ -86,7 +86,8 @@ const paymentsRequestResolver = async params => {
                     return doubleGet(params);
             }
         }
-        return simpleGet(params);
+        // We need to request both sent and received payments
+        return doubleGet(params);
     } catch (error) {
         console.log(JSON.stringify(error));
     }
