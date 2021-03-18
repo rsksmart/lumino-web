@@ -28,30 +28,17 @@ class PaymentsContainer extends Component{
         };
     }
 
+    componentDidMount() {
+        this.getData();
+        this.props.pollTokens();
+    }
 
-    render=()=>{
-        return <div>
-            <PollingContainer
-                render={this.renderPolling}
-                pollAction={this.getData}
-                dueTim={0}
-                periodOfScheduler={2000}
-            />
-            <PollingContainer
-                render={()=>{return null}}
-                pollAction={this.props.pollTokens}
-                dueTim={0}
-                periodOfScheduler={30000}
-            />
-        </div>
-    };
-
-    getData = ()=>{
+    getData = () =>{
         this.props.getPayments(this.state.filterInitiator, this.state.filterTarget, this.state.filterFromDate, this.state.filterToDate, this.state.filterStatus);
     };
 
 
-    renderPolling=()=>{
+    render = () => {
         let mainTable = null;
 
         if (this.props.payments) {
