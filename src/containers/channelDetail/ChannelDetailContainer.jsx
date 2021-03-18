@@ -19,9 +19,6 @@ class ChannelDetailContainer extends Component {
       if (this.props.selectedSuggestion) {
         sessionStorage.setItem("tempSelectedSuggestion", JSON.stringify(this.props.selectedSuggestion));
       }
-      const actualDate = new Date();
-      let oneMonthBefore = new Date().setMonth(actualDate.getMonth() - 1);
-      const oneMonthBeforeDate = new Date(oneMonthBefore);
       const channelData = await getChannel(
         this.getSelectedSuggestion().tokenAddress,
           this.getSelectedSuggestion().partnerAddress
