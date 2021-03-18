@@ -114,9 +114,12 @@ const invertGet = async params => {
 
 const doubleGet = async params => {
     try {
-        const res = await Promise.all([simpleGet(params), invertGet(params)]);
-        const data = [...res[0], ...res[1]];
-        return data;
+        if (!params.initiator_address && !params.target_address){
+            return await simpleGet(params);
+        } else {
+            const res = await Promise.all([simpleGet(params), invertGet(params)]);
+            return [...res[0], ...res[1]];
+        }
     } catch (error) {
         console.log(error);
     }
