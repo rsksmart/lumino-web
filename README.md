@@ -36,10 +36,10 @@ REACT_APP_LUMINO_ENDPOINT=http://localhost:5001
 ```
 Where those values are:
 
-**REACT_APP_NODE_ADDRESS**: the address the lumino node is using.
-**REACT_APP_NODE_RNS_DOMAIN**: the rns domain associated to that address.
-**REACT_APP_RSK_RPC_ENDPOINT**: the rsk node rpc endpoint.
-**REACT_APP_LUMINO_ENDPOINT**: the lumino node endpoint.
+**REACT_APP_NODE_ADDRESS**: the RSK address the Lumino node is using.
+**REACT_APP_NODE_RNS_DOMAIN**: the RNS domain associated to that address.
+**REACT_APP_RSK_RPC_ENDPOINT**: the RSK node RPC endpoint.
+**REACT_APP_LUMINO_ENDPOINT**: the Lumino node API endpoint.
 
 2. Run the following command:
 
