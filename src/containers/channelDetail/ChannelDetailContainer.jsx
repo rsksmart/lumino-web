@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPayments } from "../../actions/paymentsActions";
-import PollingContainer from "../../genericContainers/PollingContainer";
 import { getChannel } from "../../services/channelServices";
 import { USER_ADDRESS } from "../../config/applicationConstants";
 import { getDecimals } from "../../lib/tokens/tokensLogic";

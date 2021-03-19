@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import PollingContainer from "../../genericContainers/PollingContainer";
 import {getPayments} from "../../actions/paymentsActions";
 import {DatePicker} from '@y0c/react-datepicker';
 // import calendar style
