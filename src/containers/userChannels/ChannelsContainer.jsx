@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import {
   closeChannel,
   depositChannel,
+  initChannels,
   pollChannels,
   putChannel
 } from "../../actions/channelsActions";
@@ -25,6 +26,7 @@ import { incrementTaskPending } from "../../actions/taskActions";
 import { selectedSuggestion } from "../../actions/searchActions";
 import QuickPayment from "../payments/QuickPayment";
 import AddChannelModal from "./AddChannelModal";
+import {STATE_OPENED} from "../../lib/channels/channelsConstants";
 class ChannelsContainer extends Component {
   constructor(props, context) {
     super(props, context);
@@ -42,6 +44,10 @@ class ChannelsContainer extends Component {
       partnerSuggestions: [],
       tokensSuggestions: []
     };
+  }
+
+  componentDidMount() {
+    this.props.initChannels();
   }
 
   handleShow = () => {
@@ -137,7 +143,22 @@ class ChannelsContainer extends Component {
     this.props.pollTokens();
   };
 
+  showSendTokensButton() {
+    return this.props.channels && this.props.channels.some(channel => channel.state === STATE_OPENED);
+  }
+
   render = () => {
+    const sendTokensButton = this.showSendTokensButton() ?
+        (<div className="col-sm col-md-auto text-center">
+            <button
+                type="button"
+                name="button"
+                className="btn btn-lg btn-green"
+                onClick={this.handleOpenQuickPayment}>
+              Send Tokens
+              <i className="fal fa-money-bill-alt fa-lg ml-2 pl-2 border-left align-middle" />
+            </button>
+          </div>) : null;
     return (
         <div>
           <div className="py-2 px-2 px-md-5 filters-bar">
@@ -151,7 +172,7 @@ class ChannelsContainer extends Component {
               render={this.renderPolling}
               pollAction={this.props.pollChannels}
               dueTim={0}
-              periodOfScheduler={2000}
+              periodOfScheduler={5000}
           />
           <PollingContainer
               render={()=>{return null}}
@@ -166,23 +187,12 @@ class ChannelsContainer extends Component {
                     type="button"
                     name="button"
                     className="btn btn-lg btn-green"
-                    onClick={this.handleShow}
-                >
+                    onClick={this.handleShow}>
                   New Channel{" "}
                   <i className="fal fa-chart-network fa-lg ml-2 pl-2 border-left align-middle" />
                 </button>
               </div>
-              <div className="col-sm col-md-auto text-center">
-                <button
-                    type="button"
-                    name="button"
-                    className="btn btn-lg btn-green"
-                    onClick={this.handleOpenQuickPayment}
-                >
-                  Send Tokens
-                  <i className="fal fa-money-bill-alt fa-lg ml-2 pl-2 border-left align-middle" />
-                </button>
-              </div>
+              {sendTokensButton}
             </div>
           </div>
           <div className="container-fluid px-3 px-md-5">
@@ -227,6 +237,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   const actions = {
+    initChannels: initChannels,
     pollChannels: pollChannels,
     putChannel: putChannel,
     incrementTaskPending: incrementTaskPending,

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPayments } from "../../actions/paymentsActions";
-import PollingContainer from "../../genericContainers/PollingContainer";
 import { getChannel } from "../../services/channelServices";
 import { USER_ADDRESS } from "../../config/applicationConstants";
 import { getDecimals } from "../../lib/tokens/tokensLogic";
@@ -14,25 +13,40 @@ import { ALL_STATUSES } from "../../constants/uiConstants";
 
 class ChannelDetailContainer extends Component {
   async componentDidMount() {
-    if (this.props.selectedSuggestion) {
-      const actualDate = new Date();
-      let oneMonthBefore = new Date().setMonth(actualDate.getMonth() - 1);
-      const oneMonthBeforeDate = new Date(oneMonthBefore);
-      let channelData = await getChannel(
-        this.props.selectedSuggestion.tokenAddress,
-        this.props.selectedSuggestion.partnerAddress
+    const selectedSuggestion = this.getSelectedSuggestion();
+    if (selectedSuggestion) {
+      if (this.props.selectedSuggestion) {
+        sessionStorage.setItem("tempSelectedSuggestion", JSON.stringify(this.props.selectedSuggestion));
+      }
+      const channelData = await getChannel(
+        this.getSelectedSuggestion().tokenAddress,
+        this.getSelectedSuggestion().partnerAddress
       );
       this.setState({
         filterInitiator: USER_ADDRESS,
         filterTarget: channelData.partner_address,
-        filterFromDate: oneMonthBeforeDate,
-        filterToDate: new Date(),
         myBalance: channelData.balance,
-        filterStatus: undefined
+      });
+      this.getData({
+        filterInitiator: USER_ADDRESS,
+        filterTarget: channelData.partner_address,
       });
     } else {
       this.props.history.push("/channels");
     }
+  }
+
+  getSelectedSuggestion() {
+    // TODO: this should be treated as an url param in the future so we can avoid having to save this to session storage
+    //  we should have an url like /channelDetail/<token_address>/<partner_address>
+    if (this.props.selectedSuggestion) {
+      return this.props.selectedSuggestion;
+    }
+    const selectedSuggestion = sessionStorage.getItem("tempSelectedSuggestion");
+    if (selectedSuggestion) {
+      return JSON.parse(selectedSuggestion);
+    }
+    return null;
   }
 
   onStatusChange = event => {
@@ -53,8 +67,8 @@ class ChannelDetailContainer extends Component {
     });
   }
 
-  applyFilters = async () => {
-    await this.getData();
+  applyFilters = () => {
+    this.getData();
   };
 
   constructor(props) {
@@ -63,43 +77,24 @@ class ChannelDetailContainer extends Component {
       filterInitiator: undefined,
       filterFromDate: undefined,
       filterToDate: undefined,
-      filterStatus: undefined,
+      filterStatus: ALL_STATUSES,
       myBalance: undefined,
       loading: true
     };
   }
 
-  resolveRender = () => {
-    const { selectedSuggestion } = { ...this.props };
-    return selectedSuggestion ? (
-      <PollingContainer
-        render={this.renderPolling}
-        pollAction={this.getData}
-        dueTim={0}
-        periodOfScheduler={2000}
-      />
-    ) : (
-      <h5 className="m-5 text-center">
-        Click on "View Details" on a channel to visualize the data
-      </h5>
-    );
-  };
-
-  render = () => {
-    return this.resolveRender();
-  };
-
-  getData = () => {
+  getData = ({filterInitiator, filterTarget, filterFromDate, filterToDate, filterStatus, networkId} = {}) => {
     this.props.getPayments(
-      this.state.filterInitiator,
-      this.state.filterTarget,
-      this.state.filterFromDate,
-      this.state.filterToDate,
-      this.state.filterStatus,
-      this.props.selectedSuggestion.networkId
+      filterInitiator || this.state.filterInitiator,
+      filterTarget || this.state.filterTarget,
+      filterFromDate || this.state.filterFromDate,
+      filterToDate || this.state.filterToDate,
+      filterStatus || this.state.filterStatus,
+      networkId || this.getSelectedSuggestion().networkId
     );
   };
-  renderPolling = () => {
+  
+  render = () => {
     let mainTable = null;
     if (this.props.payments && this.state.loading) {
       mainTable = (
@@ -112,7 +107,7 @@ class ChannelDetailContainer extends Component {
     }
     let balanceInTokens = fromWei(
       this.state.myBalance,
-      getDecimals(this.props.selectedSuggestion.tokenAddress, this.props.tokens)
+      getDecimals(this.getSelectedSuggestion().tokenAddress, this.props.tokens)
     );
     return (
         <div className="container-fluid py-5 px-2 my-5">
@@ -132,8 +127,8 @@ class ChannelDetailContainer extends Component {
                 <div className="text-center token-info py-5 py-xl-0">
                   <ul className="list-unstyled mb-0">
                     <li><i className="text-blue fal fa-coins fa-2x"></i></li>
-                    <li className="text-blue"><b>{this.props.selectedSuggestion.tokenName}</b></li>
-                    <li className="text-blue overflow-mobile">{this.props.selectedSuggestion.tokenAddress}</li>
+                    <li className="text-blue"><b>{this.getSelectedSuggestion().tokenName}</b></li>
+                    <li className="text-blue overflow-mobile">{this.getSelectedSuggestion().tokenAddress}</li>
                     <li></li>
                   </ul>
                 </div>
@@ -143,7 +138,7 @@ class ChannelDetailContainer extends Component {
                     {/*<div className="channel-balance-item right-balance bg-white position-absolute rounded px-2 py-1 shadow-sm ">300</div>*/}
                   </div>
                   <p className="text-green overflow-mobile">
-                    {this.props.selectedSuggestion.partnerAddress}
+                    {this.getSelectedSuggestion().partnerAddress}
                   </p>
                 </div>
               </div>
@@ -188,7 +183,7 @@ class ChannelDetailContainer extends Component {
                 <div className="col-auto ml-auto">
                   <button
                     className="btn btn-green"
-                    onClick={async () => await this.applyFilters()}
+                    onClick={() => this.applyFilters()}
                   >
                     Apply <i className="fal fa-sliders-v ml-3" />
                   </button>
@@ -216,7 +211,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   const actions = {
-    getPayments: getPayments
+    getPayments
   };
   return bindActionCreators(actions, dispatch);
 };
