@@ -21,7 +21,7 @@ class ChannelDetailContainer extends Component {
       }
       const channelData = await getChannel(
         this.getSelectedSuggestion().tokenAddress,
-          this.getSelectedSuggestion().partnerAddress
+        this.getSelectedSuggestion().partnerAddress
       );
       this.setState({
         filterInitiator: USER_ADDRESS,
