@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPayments } from "../../actions/paymentsActions";
-import PollingContainer from "../../genericContainers/PollingContainer";
 import { getChannel } from "../../services/channelServices";
 import { USER_ADDRESS } from "../../config/applicationConstants";
 import { getDecimals } from "../../lib/tokens/tokensLogic";
@@ -19,20 +18,18 @@ class ChannelDetailContainer extends Component {
       if (this.props.selectedSuggestion) {
         sessionStorage.setItem("tempSelectedSuggestion", JSON.stringify(this.props.selectedSuggestion));
       }
-      const actualDate = new Date();
-      let oneMonthBefore = new Date().setMonth(actualDate.getMonth() - 1);
-      const oneMonthBeforeDate = new Date(oneMonthBefore);
-      let channelData = await getChannel(
+      const channelData = await getChannel(
         this.getSelectedSuggestion().tokenAddress,
-          this.getSelectedSuggestion().partnerAddress
+        this.getSelectedSuggestion().partnerAddress
       );
       this.setState({
         filterInitiator: USER_ADDRESS,
         filterTarget: channelData.partner_address,
-        filterFromDate: oneMonthBeforeDate,
-        filterToDate: new Date(),
         myBalance: channelData.balance,
-        filterStatus: undefined
+      });
+      this.getData({
+        filterInitiator: USER_ADDRESS,
+        filterTarget: channelData.partner_address,
       });
     } else {
       this.props.history.push("/channels");
@@ -70,8 +67,8 @@ class ChannelDetailContainer extends Component {
     });
   }
 
-  applyFilters = async () => {
-    await this.getData();
+  applyFilters = () => {
+    this.getData();
   };
 
   constructor(props) {
@@ -80,42 +77,24 @@ class ChannelDetailContainer extends Component {
       filterInitiator: undefined,
       filterFromDate: undefined,
       filterToDate: undefined,
-      filterStatus: undefined,
+      filterStatus: ALL_STATUSES,
       myBalance: undefined,
       loading: true
     };
   }
 
-  resolveRender = () => {
-    return this.getSelectedSuggestion() ? (
-      <PollingContainer
-        render={this.renderPolling}
-        pollAction={this.getData}
-        dueTim={0}
-        periodOfScheduler={2000}
-      />
-    ) : (
-      <h5 className="m-5 text-center">
-        Click on "View Details" on a channel to visualize the data
-      </h5>
-    );
-  };
-
-  render = () => {
-    return this.resolveRender();
-  };
-
-  getData = () => {
+  getData = ({filterInitiator, filterTarget, filterFromDate, filterToDate, filterStatus, networkId} = {}) => {
     this.props.getPayments(
-      this.state.filterInitiator,
-      this.state.filterTarget,
-      this.state.filterFromDate,
-      this.state.filterToDate,
-      this.state.filterStatus,
-      this.getSelectedSuggestion().networkId
+      filterInitiator || this.state.filterInitiator,
+      filterTarget || this.state.filterTarget,
+      filterFromDate || this.state.filterFromDate,
+      filterToDate || this.state.filterToDate,
+      filterStatus || this.state.filterStatus,
+      networkId || this.getSelectedSuggestion().networkId
     );
   };
-  renderPolling = () => {
+  
+  render = () => {
     let mainTable = null;
     if (this.props.payments && this.state.loading) {
       mainTable = (
@@ -204,7 +183,7 @@ class ChannelDetailContainer extends Component {
                 <div className="col-auto ml-auto">
                   <button
                     className="btn btn-green"
-                    onClick={async () => await this.applyFilters()}
+                    onClick={() => this.applyFilters()}
                   >
                     Apply <i className="fal fa-sliders-v ml-3" />
                   </button>
@@ -232,7 +211,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   const actions = {
-    getPayments: getPayments
+    getPayments
   };
   return bindActionCreators(actions, dispatch);
 };
