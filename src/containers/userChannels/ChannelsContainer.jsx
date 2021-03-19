@@ -143,21 +143,22 @@ class ChannelsContainer extends Component {
     this.props.pollTokens();
   };
 
-  hasChannelOpened() {
-    return this.props.channels && this.props.channels.filter(channel => channel.state === STATE_OPENED).length > 0;
+  showSendTokensButton() {
+    return this.props.channels && this.props.channels.some(channel => channel.state === STATE_OPENED);
   }
 
   render = () => {
-    const sendTokensButton = this.hasChannelOpened() ? (<div className="col-sm col-md-auto text-center">
-      <button
-          type="button"
-          name="button"
-          className="btn btn-lg btn-green"
-          onClick={this.handleOpenQuickPayment}>
-        Send Tokens
-        <i className="fal fa-money-bill-alt fa-lg ml-2 pl-2 border-left align-middle" />
-      </button>
-    </div>) : null;
+    const sendTokensButton = this.showSendTokensButton() ?
+        (<div className="col-sm col-md-auto text-center">
+            <button
+                type="button"
+                name="button"
+                className="btn btn-lg btn-green"
+                onClick={this.handleOpenQuickPayment}>
+              Send Tokens
+              <i className="fal fa-money-bill-alt fa-lg ml-2 pl-2 border-left align-middle" />
+            </button>
+          </div>) : null;
     return (
         <div>
           <div className="py-2 px-2 px-md-5 filters-bar">
