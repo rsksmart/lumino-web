@@ -163,10 +163,7 @@ export default class ChannelItem extends Component {
     let paymentSubmitButton = (<Button
         className="btn-pay border-0 btn-block py-3"
         variant="primary"
-        onClick={() => this.handleMakePayment()}
-    >
-      PAY
-    </Button>);
+        onClick={() => this.handleMakePayment()}>PAY</Button>);
 
     if (this.state.checked){
       paymentForm = <InvoiceForm
@@ -177,15 +174,24 @@ export default class ChannelItem extends Component {
       paymentSubmitButton = (<Button
           className="btn-pay border-0 btn-block py-3"
           variant="primary"
-          onClick={() => this.handleMakePaymentInvoice()}
-      >
+          onClick={() => this.handleMakePaymentInvoice()}>
         PAY
       </Button>)
     }
 
+    const buttons = [];
+    let detailsButtonClass = "mt-md-6 mr-md-5";
+
     switch (this.props.state) {
       case STATE_OPENED:
+        detailsButtonClass = "mt-md-3";
         badgeClass += " badge-success";
+        buttons.push(<button className="btn py-lg-3 d-lg-block btn-pay text-white mb-md-3 mr-2 ml-md-0"
+                             onClick={this.handleShowPayment}>PAY!</button>);
+        buttons.push(<button className="btn btn-blue text-white mr-md-2 mr-2"
+                             onClick={this.handleShow}>Deposit</button>);
+        buttons.push(<button className="btn btn btn-outline-dark ml-md-2 mr-md-0 mr-2"
+                             onClick={this.handleModalShowChannel}>Close</button>);
         break;
       case STATE_CLOSED:
         badgeClass += " badge-dark";
@@ -197,6 +203,9 @@ export default class ChannelItem extends Component {
         badgeClass += "";
         break;
     }
+
+    buttons.push(<Link className={"btn d-lg-block shadow-none " + detailsButtonClass + " btn-secondary btn-view-detail"}
+                       to={routeLink} onClick={() => this.props.selectedSuggestion(suggestion)}>View Details</Link>);
 
     return (
       <li className="col-12 my-4">
@@ -210,9 +219,6 @@ export default class ChannelItem extends Component {
               <li>
                 <b>Address:</b>{" "}
                 <span className="text-blue ml-1">{this.props.partner}</span>
-                {/*<Clipboard data-clipboard-text={this.props.partner} className="btn btn-copy-address text-green ml-1">*/}
-                {/*<i className="fal fa-copy align-middle"></i>*/}
-                {/*</Clipboard>*/}
               </li>
               <li>
                 <b>Token Name:</b>{" "}
@@ -221,9 +227,6 @@ export default class ChannelItem extends Component {
               <li>
                 <b>Token Address:</b>{" "}
                 <span className="text-blue ml-1">{this.props.token}</span>
-                {/*<Clipboard data-clipboard-text={this.props.token} className="btn btn-copy-address text-green ml-1">*/}
-                {/*<i className="fal fa-copy align-middle"></i>*/}
-                {/*</Clipboard>*/}
               </li>
               <li>
                 <b>Balance:</b>{" "}
@@ -237,32 +240,7 @@ export default class ChannelItem extends Component {
               </li>
             </ul>
             <div className="ml-auto text-center px-3 pl-lg-0 mt-3 mt-md-0">
-              <button
-                className="btn py-lg-3 d-lg-block btn-pay text-white mb-md-3 mr-2 ml-md-0"
-                onClick={this.handleShowPayment}
-              >
-                PAY!
-              </button>
-              <button
-                className="btn btn-blue text-white mr-md-2 mr-2"
-                onClick={this.handleShow}
-              >
-                Deposit
-              </button>
-              {/*<button className="btn btn btn-outline-dark ml-2" onClick={()=> this.props.closeChannel(this.props.token, this.props.partner)}>*/}
-              <button
-                className="btn btn btn-outline-dark ml-md-2 mr-md-0 mr-2"
-                onClick={this.handleModalShowChannel}
-              >
-                Close
-              </button>
-              <Link
-                className="btn d-lg-block shadow-none mt-md-3 btn-secondary btn-view-detail"
-                to={routeLink}
-                onClick={() => this.props.selectedSuggestion(suggestion)}
-              >
-                View Details
-              </Link>
+              {buttons}
             </div>
           </div>
         </div>
@@ -277,26 +255,21 @@ export default class ChannelItem extends Component {
                 value={this.state.inputAmount}
                 className="form-control shadow-none"
                 placeholder={"Amount"}
-                onValueChange={e => this.handleChangeAmount(e)}
-              />
+                onValueChange={e => this.handleChangeAmount(e)}/>
             </div>
           </Modal.Body>
           <Modal.Footer>
             <Button
               className="btn-pay border-0 btn-block py-3"
               variant="primary"
-              onClick={() => this.handleDeposit()}
-            >
-              Deposit
-            </Button>
+              onClick={() => this.handleDeposit()}>Deposit</Button>
           </Modal.Footer>
         </Modal>
 
         <Modal
           show={this.state.showPayment}
           onHide={this.handleClosePayment}
-          centered
-        >
+          centered>
           <Modal.Header closeButton>
             <Modal.Title>Payment</Modal.Title>
             <div className={"invoice-switch-left"}>
@@ -308,17 +281,14 @@ export default class ChannelItem extends Component {
            {paymentForm}
           </Modal.Body>
           <Modal.Footer>
-
             {paymentSubmitButton}
-
           </Modal.Footer>
         </Modal>
 
         <Modal
           show={this.state.showChannel}
           onHide={this.handleModalCloseChannel}
-          centered
-        >
+          centered>
           <Modal.Header closeButton>
             <Modal.Title>Close Channel</Modal.Title>
           </Modal.Header>
@@ -333,10 +303,7 @@ export default class ChannelItem extends Component {
             <Button
               className="btn-close border-0 btn-block py-3"
               variant="primary"
-              onClick={() => this.handleCloseChannel()}
-            >
-              CLOSE
-            </Button>
+              onClick={() => this.handleCloseChannel()}>CLOSE</Button>
           </Modal.Footer>
         </Modal>
       </li>

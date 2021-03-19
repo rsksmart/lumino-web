@@ -27,18 +27,27 @@ If you don't plan to modify the source code, please use the production build.
 ## Start your RIF Lumino Node WEB
 
 1. Go to `$RIF_LUMINO_WEB_PATH`
+2. Setup the .env file there:
+```dotenv
+REACT_APP_NODE_ADDRESS=0x223c10155C348195F40e427FeD7e0FB7D1C4d025
+REACT_APP_NODE_RNS_DOMAIN=domain.rsk
+REACT_APP_RSK_RPC_ENDPOINT=http://localhost:4444
+REACT_APP_LUMINO_ENDPOINT=http://localhost:5001
+```
+Where those values are:
+
+**REACT_APP_NODE_ADDRESS**: the RSK address the Lumino node is using.
+**REACT_APP_NODE_RNS_DOMAIN**: the RNS domain associated to that address.
+**REACT_APP_RSK_RPC_ENDPOINT**: the RSK node RPC endpoint.
+**REACT_APP_LUMINO_ENDPOINT**: the Lumino node API endpoint.
+
 2. Run the following command:
 
 ```
-REACT_APP_NODE_ADDRESS=$RSK_ADDRESS REACT_APP_NODE_RNS_DOMAIN=$RNS_ADDRESS yarn start
+yarn start
 ```
 
-| FIELD                                   | DESCRIPTION                                                                |
-|-----------------------------------------|----------------------------------------------------------------------------|
-| `$RSK_ADDRESS`                          | The RSK address asigned to your RIF Lumino Node                                                  |
-| `$RNS_ADDRESS`                           | The RNS domain asociated with your RSK node Address                                     |
-
-Note: You can start the web without specifying `$RNS_ADDRESS` if your Lumino node is not registered into RNS. 
+**Note: You can start the web without specifying `REACT_APP_NODE_RNS_DOMAIN` if your Lumino node is not registered into RNS.** 
 
 
 3.  After you run yarn command you will be presented with the following message:
