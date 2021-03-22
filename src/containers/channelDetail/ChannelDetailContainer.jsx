@@ -73,10 +73,13 @@ class ChannelDetailContainer extends Component {
 
   constructor(props) {
     super(props);
+    const today = new Date();
+    const lastMonth = new Date(today)
+    lastMonth.setMonth(today.getMonth() - 1);
     this.state = {
       filterInitiator: undefined,
-      filterFromDate: undefined,
-      filterToDate: undefined,
+      filterFromDate: lastMonth,
+      filterToDate: today,
       filterStatus: ALL_STATUSES,
       myBalance: undefined,
       loading: true
